@@ -31,6 +31,7 @@ class AuthenticationBloc
   final UserRepository _userRepository;
   StreamSubscription<AuthenticationStatus> _authenticationStatusSubscription;
 
+  ///event 转换为 state
   @override
   Stream<AuthenticationState> mapEventToState(
     AuthenticationEvent event,
@@ -58,7 +59,9 @@ class AuthenticationBloc
       case AuthenticationStatus.unauthenticated:
         return const AuthenticationState.unauthenticated();
       case AuthenticationStatus.authenticated:
+        ///登录成功后，获取用户状态
         final user = await _tryGetUser();
+        ///获取到用户状态时，将AuthenticationState.authenticated回调到ui层
         return user != null
             ? AuthenticationState.authenticated(user)
             : const AuthenticationState.unauthenticated();

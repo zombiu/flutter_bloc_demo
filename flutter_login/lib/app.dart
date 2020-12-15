@@ -21,6 +21,10 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //专门用于在 widget 树中处理 repositories, repositories 用于处理数据请求，类似于 Redux 中的 Middleware。\
+    //从架构上看，repository 是一个或多个 data providers 的封装，并且负责与 bloc 通信。
+    // value用来提供一个已经存在的Repository
+    //RepositoryProvider只能用于存储库??
     return RepositoryProvider.value(
       value: authenticationRepository,
       child: BlocProvider(
