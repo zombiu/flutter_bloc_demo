@@ -40,6 +40,7 @@ class _SearchBarState extends State<_SearchBar> {
       controller: _textController,
       autocorrect: false,
       onChanged: (text) {
+        //text改变时，发送事件
         _githubSearchBloc.add(
           TextChanged(text: text),
         );
@@ -65,6 +66,7 @@ class _SearchBarState extends State<_SearchBar> {
 class _SearchBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //BlocBuilder：监听状态的改变。
     return BlocBuilder<GithubSearchBloc, GithubSearchState>(
       builder: (context, state) {
         if (state is SearchStateLoading) {

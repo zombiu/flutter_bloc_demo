@@ -7,7 +7,9 @@ import 'package:flutter_github_search/search_form.dart';
 
 void main() {
   final GithubRepository _githubRepository = GithubRepository(
+    //换成数据
     GithubCache(),
+    //网络数据
     GithubClient(),
   );
 

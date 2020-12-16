@@ -34,9 +34,13 @@ class GithubSearchBloc extends Bloc<GithubSearchEvent, GithubSearchState> {
       } else {
         yield SearchStateLoading();
         try {
+          //请求成功之后 自动发送SearchStateSuccess状态
+          //请求成功了 多次，但是发送请求结果只有一次 为什么
           await Future<void>.delayed(Duration(seconds: 2));
           final results = await githubRepository.search(searchTerm);
+          print("-->>请求成功 ${results.items}");
           yield SearchStateSuccess(results.items);
+          print("-->>发送请求结果完毕");
         } catch (error) {
           yield error is SearchResultError
               ? SearchStateError(error.message)
